@@ -287,7 +287,7 @@
             updateHistoryList();
         }
         
-        // Save data to localStorage
+        // Save all data to localStorage
         function saveData() {
             localStorage.setItem('mysteryBeers', JSON.stringify(beers));
             localStorage.setItem('servingHistory', JSON.stringify(servingHistory));
@@ -350,7 +350,7 @@
             saveData();
         }
         
-        // Function to update the beer list display
+        // Update the beer list display
         function updateBeerList() {
             if (beers.length === 0) {
                 beerListElement.innerHTML = '<div class="empty-message">No beers in fridge yet!</div>';
@@ -393,7 +393,7 @@
             });
         }
         
-        // Function to toggle beer deleted status
+        // Toggle beer deleted status
         function toggleBeerStatus(beerNumber) {
             const beerIndex = beers.findIndex(beer => beer.number === beerNumber);
             
@@ -404,7 +404,7 @@
             }
         }
         
-        // Function to serve a random beer
+        // Serve a random beer
         function serveBeer() {
             const availableBeers = beers.filter(beer => !beer.deleted);
             
@@ -415,7 +415,7 @@
             
             const customerName = customerNameInput.value.trim() || 'Anonymous';
             
-            // Pick a random beer from the available beers
+            // Pick a random beer from the fridge
             const randomIndex = Math.floor(Math.random() * availableBeers.length);
             const selectedBeer = availableBeers[randomIndex];
             
@@ -446,7 +446,7 @@
             });
         }
         
-        // Function to add entry to serving history
+        // Add entry to serving history
         function addToHistory(customerName, beerName, beerNumber) {
             const timestamp = new Date();
             
@@ -464,8 +464,7 @@
         
         // Format time for display
         function formatTime(date) {
-            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + 
-                   ' ' + date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
         
         // Update serving history list
@@ -498,10 +497,11 @@
             const shouldReset = confirm('Are you sure? Clicking confirm will remove all of this data forever')
             if(shouldReset){
                 localStorage.clear();
+
             } 
         }
         
-        // Event listeners
+        // event listeners
         addBeerButton.addEventListener('click', addBeer);
         
         beerNameInput.addEventListener('keypress', function(e) {
